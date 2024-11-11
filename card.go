@@ -81,26 +81,30 @@ func (c Card) cardStrings() [5]string {
 	var lines [5]string
 	// number card
 	if c.royalty == NoRoyalty {
+		//is Ace
 		if c.num == Ace {
 			lines[0] = "+-----+"
 			lines[1] = fmt.Sprintf("|%s    |", c.suit)
 			lines[2] = fmt.Sprintf("|  A  |")
 			lines[3] = fmt.Sprintf("|    %s|", c.suit)
 			lines[4] = "+-----+"
-		}
-		if c.num == 10 {
-			lines[0] = "+-----+"
-			lines[1] = fmt.Sprintf("|%d   |", c.num)
-			lines[2] = fmt.Sprintf("|  %s  |", c.suit)
-			lines[3] = fmt.Sprintf("|   %d|", c.num)
-			lines[4] = "+-----+"
 		} else {
-			lines[0] = "+-----+"
-			lines[1] = fmt.Sprintf("|%d    |", c.num)
-			lines[2] = fmt.Sprintf("|  %s  |", c.suit)
-			lines[3] = fmt.Sprintf("|    %d|", c.num)
-			lines[4] = "+-----+"
+			//not Ace
+			if c.num == 10 {
+				lines[0] = "+-----+"
+				lines[1] = fmt.Sprintf("|%d   |", c.num)
+				lines[2] = fmt.Sprintf("|  %s  |", c.suit)
+				lines[3] = fmt.Sprintf("|   %d|", c.num)
+				lines[4] = "+-----+"
+			} else {
+				lines[0] = "+-----+"
+				lines[1] = fmt.Sprintf("|%d    |", c.num)
+				lines[2] = fmt.Sprintf("|  %s  |", c.suit)
+				lines[3] = fmt.Sprintf("|    %d|", c.num)
+				lines[4] = "+-----+"
+			}
 		}
+
 	} else {
 		// royalty card
 		lines[0] = "+-----+"
