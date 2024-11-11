@@ -20,12 +20,12 @@ const (
 	Jack      Royalty = "J"
 	Queen     Royalty = "Q"
 	King      Royalty = "K"
-	Ace       Royalty = "A"
 	NoRoyalty Royalty = ""
 )
 
 const (
 	NoCardNum CardNum = 0
+	Ace       CardNum = 1
 	Two       CardNum = 2
 	Three     CardNum = 3
 	Four      CardNum = 4
@@ -54,18 +54,25 @@ func (c Card) toString() {
 			fmt.Printf("|    %d|\n", c.num)
 			fmt.Printf("+-----+\n")
 			return
+		} else if c.num == Ace {
+			fmt.Printf("+------+\n")
+			fmt.Printf("|%s    |\n", c.suit)
+			fmt.Printf("|  A   |\n")
+			fmt.Printf("|    %s|\n", c.suit)
+			fmt.Printf("+------+\n")
 		}
-		fmt.Printf("+------+\n")
-		fmt.Printf("|%d    |\n", c.num)
-		fmt.Printf("|  %s   |\n", c.suit)
-		fmt.Printf("|    %d|\n", c.num)
-		fmt.Printf("+------+\n")
+		// 10
+		fmt.Printf("+-----+\n")
+		fmt.Printf("|%d   |\n", c.num)
+		fmt.Printf("|  %s  |\n", c.suit)
+		fmt.Printf("|   %d|\n", c.num)
+		fmt.Printf("+-----+\n")
 	}
 	//royalty
 	fmt.Printf("+-----+\n")
-	fmt.Printf("|     |\n")
+	fmt.Printf("|%s    |\n", c.suit)
 	fmt.Printf("|  %s  |\n", c.royalty)
-	fmt.Printf("|     |\n")
+	fmt.Printf("|    %s|\n", c.suit)
 	fmt.Printf("+-----+\n")
 }
 
@@ -74,6 +81,13 @@ func (c Card) cardStrings() [5]string {
 	var lines [5]string
 	// number card
 	if c.royalty == NoRoyalty {
+		if c.num == Ace {
+			lines[0] = "+-----+"
+			lines[1] = fmt.Sprintf("|%s    |", c.suit)
+			lines[2] = fmt.Sprintf("|  A  |")
+			lines[3] = fmt.Sprintf("|    %s|", c.suit)
+			lines[4] = "+-----+"
+		}
 		if c.num == 10 {
 			lines[0] = "+-----+"
 			lines[1] = fmt.Sprintf("|%d   |", c.num)
@@ -90,9 +104,9 @@ func (c Card) cardStrings() [5]string {
 	} else {
 		// royalty card
 		lines[0] = "+-----+"
-		lines[1] = "|     |"
+		lines[1] = fmt.Sprintf("|%s    |", c.suit)
 		lines[2] = fmt.Sprintf("|  %s  |", c.royalty)
-		lines[3] = "|     |"
+		lines[3] = fmt.Sprintf("|    %s|", c.suit)
 		lines[4] = "+-----+"
 	}
 	return lines
