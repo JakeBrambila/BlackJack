@@ -75,7 +75,7 @@ Once the game is running, follow the on-screen prompts to play:
 	•	You win if your hand’s value is closer to 21 than the dealer’s without exceeding 21.
 	•	If both hands have the same value, it’s a “push” (tie).
 
-##Example Output
+## Example Output
 ```
 Welcome to Blackjack!
 Your hand: +-----+  
