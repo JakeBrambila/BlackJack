@@ -42,7 +42,7 @@ This project is a command-line Blackjack game built in Go. It implements a deck 
    ```
 2. **Run the Game:**
    ```bash
-   go run main.go
+   go run main.go card.go deck.go hand.go
    ```
 3. **Build the Executable(optional):**
    ```bash
@@ -78,19 +78,20 @@ Once the game is running, follow the on-screen prompts to play:
 ## Example Output
 ```
 Welcome to Blackjack!
-Your hand: +-----+  
-           |K    |  
-           |  ♠  |
-           |    K|    
-           +-----+  
-Dealer's hand: +-----+  +-----+
-               |?    |  |  ♠  |
-               |  ♠  |  |    ?|
-               +-----+  +-----+
+Your hand:      +-----+   +-----+  
+                |K    |   |     |
+           	|  ♠  |	  |  A  |  
+           	|    K|   |     |  
+           	+-----+   +-----+ 
+Dealer's hand:  +-----+   +-----+  
+                |K    |   |     |
+           	|  ♠  |	  |  ?  |  
+           	|    K|   |     |  
+           	+-----+   +-----+ 
 
 Choose an action:
 1. Hit
-2. Stand
+2. Stay
 ```
 
 ## Contributing
