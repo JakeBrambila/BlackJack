@@ -43,6 +43,27 @@ type Card struct {
 	royalty Royalty
 }
 
+type QuestionMarkCard struct {
+	cardLines []string
+}
+
+func (c *QuestionMarkCard) createQuestionMarkCardLines() {
+	c.cardLines = make([]string, 5)
+	c.cardLines[0] = "+-----+"
+	c.cardLines[1] = "|     |"
+	c.cardLines[2] = "|  ?  |"
+	c.cardLines[3] = "|     |"
+	c.cardLines[4] = "+-----+"
+}
+
+func (c *Card) getValue() int {
+	//royalty
+	if c.num == 0 {
+		return 10
+	}
+	return int(c.num)
+}
+
 // prints a single card
 func (c Card) toString() {
 	//no royalty
@@ -85,7 +106,7 @@ func (c Card) cardStrings() [5]string {
 		if c.num == Ace {
 			lines[0] = "+-----+"
 			lines[1] = fmt.Sprintf("|%s    |", c.suit)
-			lines[2] = fmt.Sprintf("|  A  |")
+			lines[2] = "|  A  |"
 			lines[3] = fmt.Sprintf("|    %s|", c.suit)
 			lines[4] = "+-----+"
 		} else {
@@ -117,9 +138,10 @@ func (c Card) cardStrings() [5]string {
 }
 
 // prints a list of cards in a horizontal format to mimic a cards in a hand
-func PrintCardsHorizontally(cards []Card) {
+func printCardsHorizontally(cards []Card) {
 	//array of string slices
 	var linesInCard [5][]string
+	fmt.Println("----------------------------------------")
 
 	//adds all the elements of the cards to the linesInCard array
 	//e.g. linesInCard[0] = "+-----++-----++-----++-----++-----+"
@@ -141,4 +163,34 @@ func PrintCardsHorizontally(cards []Card) {
 		}
 		fmt.Println()
 	}
+	fmt.Println("----------------------------------------")
+}
+
+func printDealerCards(cards []Card) {
+	//array of string slices
+	var linesInCard [5][]string
+	questionMarkCard := QuestionMarkCard{}
+	questionMarkCard.createQuestionMarkCardLines()
+	fmt.Println("----------------------------------------")
+
+	//adds all the elements of the cards to the linesInCard array
+	//e.g. linesInCard[0] = "+-----++-----+"
+	//e.g. linesInCard[1] = "|10   ||3    |"
+	//e.g. linesInCard[2] = "|  ♠  ||  ♠  |"
+	//e.g. linesInCard[3] = "|   10||    3|"
+	//e.g. linesInCard[4] = "+-----++-----+"
+	cardString := cards[0].cardStrings()
+	for i := 0; i < 5; i++ {
+		linesInCard[i] = append(linesInCard[i], cardString[i])
+		linesInCard[i] = append(linesInCard[i], questionMarkCard.cardLines[i])
+	}
+
+	for i := 0; i < 5; i++ {
+		for _, line := range linesInCard[i] {
+			//adds a space to separate the card strings within the same index
+			fmt.Print(line + "  ")
+		}
+		fmt.Println()
+	}
+	fmt.Println("----------------------------------------")
 }
