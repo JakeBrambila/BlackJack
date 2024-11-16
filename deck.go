@@ -12,6 +12,7 @@ type Deck struct {
 // The deck is ordered in a way where the first 13 cards are Spades,
 // the next 13 are Hearts, followed by Diamonds and Clubs.
 func (d *Deck) createDeck() {
+	d.deck = make([]Card, 52)
 	var i, j, k int
 	k = 0 // Index for placing cards in the deck
 
@@ -50,9 +51,6 @@ func (d *Deck) createDeck() {
 			k++
 		}
 	}
-
-	// Shuffle the deck after creating it
-	d.shuffleDeck()
 }
 
 // shuffleDeck shuffles the cards in the deck randomly.
@@ -73,19 +71,18 @@ func (d *Deck) shuffleDeck() {
 
 // dealCard returns the top card from the deck and removes it from the deck.
 func (d *Deck) dealCard() Card {
-	var card Card = d.deck[0]
-	d.removeTopCard()
+	var card = d.deck[0]
 	return card
 }
 
-//removeTopCard removes the top card from the deck.
+// removeTopCard removes the top card from the deck.
 // is a helper function for deal card
 func (d *Deck) removeTopCard() {
 	d.deck = d.deck[1:]
 }
 
 func (d *Deck) printDeck() {
-  for i := 0; i < len(d.deck); i++ {
-    d.deck[i].toString()
-  }
+	for i := 0; i < len(d.deck); i++ {
+		d.deck[i].toString()
+	}
 }
